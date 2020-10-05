@@ -1,0 +1,25 @@
+ext.springBootVersion = '2.3.4.RELEASE'
+
+repositories { jcenter() }
+
+dependencies {
+  // Spring Boot BOM
+  implementation(platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}"))
+
+  // Kotlin
+  implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+  implementation 'org.jetbrains.kotlin:kotlin-reflect:1.4.10'
+  implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10'
+  implementation 'io.github.microutils:kotlin-logging:2.0.3'
+
+  // web
+  implementation 'org.springframework.boot:spring-boot-starter-webflux'
+  implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+  // rabbit-mq
+  implementation 'org.springframework.boot:spring-boot-starter-amqp'
+
+  // support
+  implementation 'org.apache.commons:commons-collections4:4.1'
+  implementation 'org.apache.commons:commons-lang3:3.9'
+}

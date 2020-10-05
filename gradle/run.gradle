@@ -1,0 +1,6 @@
+// ------------------------
+//   Application start
+// ------------------------
+bootRun {
+  args '--spring.profiles.active=dev'
+}

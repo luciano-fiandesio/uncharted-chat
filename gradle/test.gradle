@@ -1,0 +1,26 @@
+// -------------------
+//   Unit-Tests mit JUnit 5
+// -------------------
+ext.testcontainersVersion = '1.12.4'
+
+dependencies {
+  // JUnit 5
+  testImplementation('org.springframework.boot:spring-boot-starter-test') {
+    exclude module: 'junit'
+    exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+  }
+
+
+  testImplementation(platform("org.junit:junit-bom:5.7.0"))
+  testImplementation("org.junit.jupiter:junit-jupiter")
+  testImplementation("io.kotest:kotest-assertions-core-jvm:4.2.5")
+  testImplementation("io.mockk:mockk:1.10.2")
+
+}
+
+tasks.test {
+  useJUnitPlatform()
+  testLogging {
+    events("passed", "skipped", "failed")
+  }
+}

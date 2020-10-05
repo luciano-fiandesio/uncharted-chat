@@ -1,0 +1,16 @@
+// -------------------
+//   Code analysis
+// -------------------
+apply plugin: "io.gitlab.arturbosch.detekt"
+
+detekt {
+  toolVersion = '1.14.1'
+  input = files('src/main/kotlin')
+  config = files('gradle/code_analysis/detekt_config.yml')
+}
+
+// Replace 'detekt' with 'codeAnalysis'
+task codeAnalysis(
+    dependsOn: 'detekt',
+    description: 'Run detekt-base code analysis',
+    group: 'Verification')

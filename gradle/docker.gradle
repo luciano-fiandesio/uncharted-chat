@@ -1,0 +1,19 @@
+// ---------------------------------
+//   Docker-Image creation
+// ---------------------------------
+apply plugin: 'com.palantir.docker'
+
+ext.dockerRegistry = 'com.uncharted'
+
+task unpack(type: Copy) {
+  dependsOn bootJar
+  from(zipTree(tasks.bootJar.outputs.files.singleFile))
+  into("build/dependency")
+}
+
+docker {
+  name "${dockerRegistry}/${rootProject.name}"
+  tag 'version', "${dockerRegistry}/${rootProject.name}:${rootProject.version}"
+  copySpec.from(tasks.unpack.outputs).into("dependency")
+  buildArgs(['DEPENDENCY': "dependency"])
+}

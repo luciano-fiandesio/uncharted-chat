@@ -1,0 +1,30 @@
+// ---------------------------------
+//   Code-Format check & apply
+// ---------------------------------
+apply plugin: 'com.diffplug.spotless'
+
+spotless {
+
+  kotlin {
+    ktlint('0.39.0').userData(
+        ['indent_size': '2',
+          'continuation_indent_size' : '2',
+          'insert_final_newline': 'true',
+          'max_line_length': '120',
+          'disable_rules': 'no-wildcard-imports'])
+  }
+  groovyGradle {
+    target '*.gradle', 'gradle/*.gradle'
+    greclipse().configFile "${rootDir}/gradle/code_formatter/lunchbox.codeformat.xml", "${rootDir}/gradle/code_formatter/lunchbox.groovyformat.prefs"
+  }
+}
+
+task format(
+    dependsOn: 'spotlessApply',
+    description: 'Source code formatting (alias for spotlessApply).',
+    group: 'Verification')
+
+task formatCheck(
+    dependsOn: 'spotlessCheck',
+    description: 'Source code checking (alias for spotlessCheck).',
+    group: 'Verification')
